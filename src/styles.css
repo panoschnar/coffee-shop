@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-family: Montserrat;
+  background-image: url("assets/background-image.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.nav-link {
+  font-size: large;
+}

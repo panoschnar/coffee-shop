@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="background: rgb(34,193,195);
+background: linear-gradient(90deg, rgba(34,193,195,1) 0%, rgba(175,151,99,1) 100%);">
+  <div class="container">
+      <a class="navbar-brand" href="/home"><img src="assets/bolanle-logo.png" alt="Logo" width="120px" class="img-fluid ms-3" /></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+                  <a class="nav-link active" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/dashboard">Coffees</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#">About Us</a>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      View More
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <li><a class="dropdown-item" href="#">Sales</a></li>
+                      <li><a class="dropdown-item" href="#">Advertising</a></li>
+                      <li><a class="dropdown-item" href="#">Product Development</a></li>
+                  </ul>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#">Contact Us</a>
+              </li>
+          </ul>
+          <div class="d-flex" *ngIf="isLogedIn==false && isRegistered==false;else LogOUT" >
+              <a href="/login" class="btn btn-sm btn-dark">Login</a>
+              <a href="/register" class="btn btn-sm btn-outline-dark ms-3">Register</a>
+          </div>
+          <ng-template #LogOUT class="d-flex">
+            <h6 class="me-3 text-light mt-2">Welcome</h6>
+            <button type="button" class="btn btn-outline-dark" (click)="LogOutUser()" >Logout  </button>
+          </ng-template>
+      </div>
+  </div>
+</nav>

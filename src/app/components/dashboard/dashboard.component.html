@@ -1,0 +1,199 @@
+<div class="container-fluid">
+  <div class="row">
+  <!-- Add Card -->
+    <div class="col-md-4 mt-5">
+      <div class="card border-0 shadow p-3">
+        <h4 class="display-3 text-center text-info">Add Coffee</h4>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="CoffeeTitle"
+            name="title"
+            placeholder="add coffee title"
+            [(ngModel)]="title"
+          />
+          <label for="CoffeeTitle">Title</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="CoffeeOrigin"
+            name="origin"
+            placeholder="add coffee origin"
+            [(ngModel)]="origin"
+          />
+          <label for="CoffeeOrigin">Origin</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="number"
+            class="form-control"
+            id="CoffeeKg"
+            name="Kg"
+            placeholder="add coffee Kg"
+            [(ngModel)]="kg"
+          />
+          <label for="CoffeeKg">Kg</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="number"
+            class="form-control"
+            id="CoffeePrice"
+            name="price"
+            placeholder="add coffee price"
+            [(ngModel)]="price"
+          />
+          <label for="CoffeePrice">Price</label>
+        </div>
+        <button
+          type="button"
+          class="btn btn-outline-info"
+          (click)="addCoffee()"
+        >
+          Add Coffee
+        </button>
+      </div>
+    </div>
+    <!-- End Add Card -->
+    <div class="col-md-8 mt-5">
+      <h4 class="display-4 text-dark">Coffees Variation List</h4>
+      <div class="card p-3 shadow">
+        <div class="card-body">
+          <table class="table table-info table-hover">
+            <div *ngIf="coffees && coffees.length,else NoCoffeesDisplay"></div>
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col"(click)="ToggleSortTitle()" (click)="onSortCoffees()" style="cursor: pointer">
+                  {{ titleIsAsc ? "Title &#8593;" : "Title  &#8595;" }}
+                </th>
+                <th scope="col">Origin</th>
+                <th scope="col">Kg</th>
+                <th scope="col">Price</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody >
+              <tr *ngFor="let coffee of coffees">
+                <th>{{ coffee.id | uppercase | cutSring }}</th>
+                <th>{{ coffee.title }}</th>
+                <td>{{ coffee.origin }}</td>
+                <td>{{ coffee.kg }}</td>
+                <td>{{ coffee.price | currency: "EUR" }}</td>
+                <td>
+                  <div class="btn-group" role="group" aria-label="Basic">
+                    <button
+                      type="button"
+                      class="btn btn-info"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      (click)="EditModal(coffee)"
+                    >
+                      <i class="bi bi-pencil-square"></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-info"
+                      (click)="deleteCoffee(coffee)"
+                    >
+                      <i class="bi bi-trash-fill"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #NoCoffeesDisplay>
+  <h6 class="display-6 text-info">No Coffees on list</h6>
+</ng-template>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title display-6 text-info" id="exampleModalLabel">
+          Edit Coffee
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="CoffeeTitle"
+            value="{{ editedCoffee.title }}"
+          />
+          <label for="CoffeeTitle">Title</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="CoffeeOrigin"
+            [(ngModel)]="editedCoffee.origin"
+            name="{{ editedCoffee.origin }}"
+          />
+          <label for="CoffeeOrigin">Origin</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="number"
+            class="form-control"
+            id="CoffeeKg"
+            [(ngModel)]="editedCoffee.kg"
+            name="{{ editedCoffee.kg }}"
+          />
+          <label for="CoffeeKg">Kg</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="number"
+            class="form-control"
+            id="CoffeePrice"
+            [(ngModel)]="editedCoffee.price"
+            name="{{editedCoffee.price}}"
+          />
+          <label for="CoffeePrice">Price</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-info"
+          (click)="updateCoffee()"
+          data-bs-dismiss="modal"
+        >
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
